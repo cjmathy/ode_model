@@ -7,7 +7,7 @@ import os
 #Parse any arguments passed in by the user
 sysargs = parseArguments()
 
-#Create dictionaries containing all species and all parameters specified by required CSV files
+# Create dictionaries containing all species and all parameters specified by required CSV files
 # species = importSpecies('species.csv','ode.csv')
 # parameters = importParameters('parameters.csv')
 
@@ -33,11 +33,8 @@ else: output = prepareOutput(os.path.dirname(__file__),sysargs.out)
 import numpy as np
 
 
-#PE = (Km,Kcat)
-PE1 = (1.353,0.044)
-PE11 = (3.704,0.036)
-PE13 = (2.631,0.007)
-PE18 = (0.783,0.045)
+# PE = (Km_GAP, kcat_GAP, k_hyd, Km_GEF, kcat_GEF)
+PE1 = (
 
 proteins = [PE1,PE11,PE13,PE18]
 protein_names = ['WT','T34G','T34Q','R108Y']
