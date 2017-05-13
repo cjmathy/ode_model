@@ -2,11 +2,11 @@
 
 from setuptools import setup
 
-setup(name='ranmodel',
+setup(name='ode_model',
       version='0.1',
-      description='Ran Model',
+      description='ODE Model of GSP1 kinetics',
       author='Chris Mathy',
       author_email='chris.mathy@ucsf.edu',
-      url='need to add',
-      packages=['ranmodel'],
+      url='https://github.com/cjmathy/ode_model',
+      packages=['ode_model'],
      )setup.py
