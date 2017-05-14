@@ -9,4 +9,4 @@ setup(name='ode_model',
       author_email='chris.mathy@ucsf.edu',
       url='https://github.com/cjmathy/ode_model',
       packages=['ode_model'],
-     )setup.py
+      )
