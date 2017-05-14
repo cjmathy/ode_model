@@ -109,20 +109,20 @@ def plot_ran_ratios(y, t, species, args, output, figure):
 
     plotted_species = ['nucRanGTP',
                        'nucRanGDP',
-                       'nucRanGTP/nucRanGDP',
+                       'nucRanGDP/nucRanGTP',
                        'nucRanGTP/cytoRanGTP',
                        'cytoRanGTP',
                        'cytoRanGDP',
-                       'cytoRanGTP/cytoRanGDP',
+                       'cytoRanGDP/cytoRanGTP',
                        'nucRanGDP/cytoRanGDP']
 
     for each in plotted_species:
 
-        if each == 'nucRanGTP/nucRanGDP':
+        if each == 'nucRanGDP/nucRanGTP':
 
             ax = plt.subplot(2, 4, 3)
-            ratio = y[:, species['nucRanGTP'].index] \
-                / y[:, species['nucRanGDP'].index]
+            ratio = y[:, species['nucRanGDP'].index] \
+                / y[:, species['nucRanGTP'].index]
             ax.plot(t, ratio)
             plt.title(each)
             plt.ylabel('Ratio')
@@ -142,11 +142,11 @@ def plot_ran_ratios(y, t, species, args, output, figure):
             plt.xticks(np.arange(0, int(args.t)+1, int(args.t)/2))
             plt.grid(True)
 
-        elif each == 'cytoRanGTP/cytoRanGDP':
+        elif each == 'cytoRanGDP/cytoRanGTP':
 
             ax = plt.subplot(2, 4, 7)
-            ratio = y[:, species['cytoRanGTP'].index] \
-                / y[:, species['cytoRanGDP'].index]
+            ratio = y[:, species['cytoRanGDP'].index] \
+                / y[:, species['cytoRanGTP'].index]
             ax.plot(t, ratio)
             plt.title(each)
             plt.ylabel('Ratio')
