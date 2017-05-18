@@ -1,0 +1,13 @@
+Explanation of examples:
+
+The three CSVs in this example describe a system involving two species, species1 and species2.
+
+In ode.csv, the first-order differential equations for each species is shown. species1 is lost with rate k1, and species2 is gained accordingly with rate k1. This can be understood as describing the continuous transformation of species1 into species2. A production term, k_production, replenishes the concentration of species1. Finaly, a degradation term, k_degradation, removes a portion of each species from the system at each step.
+
+In queries.csv, two queries are shown. Each query corresponds to a single set of values for the parameters used in the ODEs.
+
+In species.csv, the initial concentrations of each species is stored. The concentration units is listed in this files header - here it is uM. This has no impact on the computation of the model, and is included solely for bookkeeping.
+
+These three example files are sufficient to run ode_model.
+
+Happy plotting!

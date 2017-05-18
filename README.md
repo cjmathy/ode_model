@@ -4,7 +4,7 @@ This project implements a numerical integrator for solving systems of ordinary d
 
 ## Usage
 
-To use the package, first run:
+To use the package, first run
 
 ```
 conda install --yes --file requirements.txt
@@ -17,8 +17,9 @@ main function (located in `ode_model/__main__.py`) can be run as follows:
 python -m ode_model
 ```
 
-System parameters are set using CSV files. Example CSV files can be found in the examples folder.
+System parameters are set using CSV files. Example CSV files can be found in the examples folder, along with an explanatory text file.
 
+A number of user options are provided, set from the command. Please see the parse_arguments methods in ode_model/io.py. Importantly, -t is used to set the length of simulation. Users are encouraged to test different simulation lengths as molecular systems can operate on vastly different timescales.
 
 ## Contact
 

@@ -1,0 +1,8 @@
+Species,species1
+- species1*k1
++ k_production
+- k_degradation
+
+Species,species2
++ species1*k1
+- k_degradation
