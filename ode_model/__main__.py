@@ -9,11 +9,11 @@ kwargs = io.parse_arguments()
 species = io.import_species(**kwargs)
 queries = io.import_queries(**kwargs)
 
-# run for each query
+# integrate model for each query
 for query in queries:
-    parameters = query.parameters
-    query.concentrations, query.t = run(species, parameters, **kwargs)
+    query.concentrations, query.t = run(species, query.parameters, **kwargs)
 
+# write final concentration table, draw plots
 io.final_conc_table(species, queries, **kwargs)
 plot.plot_all_queries(species, queries, **kwargs)
 plot.plot_each_query(species, queries, **kwargs)

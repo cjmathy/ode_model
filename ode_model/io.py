@@ -4,7 +4,7 @@ import os
 from ode_model.utils import Species, Query
 
 
-def import_species(**kwargs):
+def import_species(species_file, ode_file, **kwargs):
     '''
     Description:
         This method imports two csv files containing molecular species
@@ -17,7 +17,7 @@ def import_species(**kwargs):
         to the name of each species, and the value of each key is the
         corresponding Species object.
     Input:
-        sp_file - a string containing the csv filename (including path,
+        species_file - a string containing the csv filename (including path,
             if necessary) for the file containing Species and initial
             concentrations.
         ode_file - a string containing the csv filename (including path, if
@@ -25,9 +25,6 @@ def import_species(**kwargs):
     Returns:
         species - a dictionary mapping strings to Species objects.
     '''
-
-    species_file = kwargs['species_file']
-    ode_file = kwargs['ode_file']
 
     species = {}
     with open(species_file, 'rb') as f:
@@ -53,21 +50,23 @@ def import_species(**kwargs):
     return species
 
 
-def import_queries(**kwargs):
+def import_queries(queries_file, **kwargs):
     '''
     Description:
-        This method imports a csv file containing parameter information,
-        according to the format described in the README file. The information
-        for each parameter is stored in a dictionary. The keys of the
+        This method imports a csv file containing parameter information for
+        each query, according to the format described in the README file.
+        A Query object describes one set of parameters for a model run. The
+        parameters read in from the query file are stored in a parameters
+        dictionary, an attribute of the Query object. The keys of the
         dictionary are strings corresponding to the name of each parameter,
         and the value of each key is the value assigned to the parameter.
     Input:
-        file - a string containing the csv filename (including path,
-            if necessary).
+        queries_file - a string containing the csv filename (including path,
+            if necessary) for the file containing parameter information for
+            all queries.
     Returns:
-        queries a list of query objects.
+        queries - a list of query objects.
     '''
-    queries_file = kwargs['queries_file']
 
     queries = []
     with open(queries_file, 'rb') as f:
@@ -103,6 +102,17 @@ def prepare_out(out_dir):
 
 
 def final_conc_table(species, queries, out_dir, **kwargs):
+    '''
+    Description:
+        This method prepares a CSV file listing the final concentrations for
+        all species, for all queries.
+    Input:
+        species - a dictionary mapping strings to Species objects.
+        queries - a list of query objects.
+        out_dir - the path to the output directory
+    Returns:
+        out_dir - the path to the output directory
+    '''
 
     species_list = [None]*len(species)
     for sp in species:
@@ -125,11 +135,12 @@ def parse_arguments():
     '''
     Description:
         This method parses additional arguments passed when the script is
-        called.
+        called. It then prepares a kwargs dictionary to be used by the
+        package.
     Input:
         None
     Returns:
-        args - a Namespace object.
+        kwargs - a dictionary containing package settings, set by user.
     '''
     parser = argparse.ArgumentParser()
     parser.add_argument("-species", default='species.csv', type=str,

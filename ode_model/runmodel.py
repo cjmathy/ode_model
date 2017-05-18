@@ -2,7 +2,7 @@ import numpy as np
 from scipy.integrate import odeint
 
 
-def run(species, parameters, **kwargs):
+def run(species, parameters, ttot, n_iter, **kwargs):
     '''
     Description:
         This method prepares the system and calls the odeint method, which
@@ -12,23 +12,21 @@ def run(species, parameters, **kwargs):
     Inputs:
         species - a dictionary mapping strings to Species objects.
         parameters - a dictionary mapping strings to floats.
-        args - a Namespace object corresponding to parsed command line
-            inputs (see the parseArguments() method)
+        ttot - an integer setting the total length of simulation.
+        n_int - an integer setting the total number of integrations steps
+            during simulation.
     Returns:
         concentrations - a numpy array with dimensions n_species x n_timepoints
         t - the numpy array with dimensions 1 x n_timepoints (useful for
             plotting concentration vs. time)
     '''
 
-    ttot = kwargs['ttot']
-    n_iter = kwargs['n_iter']
-
     # Prepare initial concentration and time vectors for odeint
     c0 = initialize_concentrations(species)
     t = np.linspace(0, ttot, n_iter)
 
     # Solve system of ODEs. Cell i,j of concentrations contains the
-    # concentration value of Species i at timepoint j.
+    # concentration value of Species j at timepoint i.
     concentrations = odeint(ode_system,
                             c0,
                             t,
@@ -47,7 +45,8 @@ def initialize_concentrations(species):
     Input:
         species - a dictionary of Species objects.
     Returns:
-        c0 - a numpy array of floats
+        c0 - a numpy array of floats, shape (n_sp,), where n_sp is the number
+            of species in the system.
     '''
     c0 = np.empty(len(species))
     for s in species:
@@ -61,7 +60,7 @@ def ode_system(y, t, species, parameters):
         This method prepares a system of first order ODEs for odeint. It
         computes the derivative of y (the vector of molecular species) at t.
         First, a variable is created for each Species and set to the current
-        value found in y. Then, a variable is created for each Parameter, and
+        value found in y. Then, a variable is created for each parameter, and
         set to its corresponding value. Finally, the derivate expressions for
         each species are evaluated according to these variables, and stored in
         the list dydt.
