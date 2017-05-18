@@ -19,7 +19,7 @@ python -m ode_model
 
 System parameters are set using CSV files. Example CSV files can be found in the examples folder, along with an explanatory text file.
 
-A number of user options are provided, set from the command. Please see the parse_arguments methods in ode_model/io.py. Importantly, -t is used to set the length of simulation. Users are encouraged to test different simulation lengths as molecular systems can operate on vastly different timescales.
+A number of user options are provided, set from the command line. Please see the parse_arguments methods in ode_model/io.py. Importantly, -t is used to set the length of simulation. Users are encouraged to test different simulation lengths as molecular systems can operate on vastly different timescales.
 
 ## Contact
 
