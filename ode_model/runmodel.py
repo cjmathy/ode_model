@@ -2,7 +2,7 @@ import numpy as np
 from scipy.integrate import odeint
 
 
-def run(species, parameters, args):
+def run(species, parameters, **kwargs):
     '''
     Description:
         This method prepares the system and calls the odeint method, which
@@ -20,9 +20,12 @@ def run(species, parameters, args):
             plotting concentration vs. time)
     '''
 
+    ttot = kwargs['ttot']
+    n_iter = kwargs['n_iter']
+
     # Prepare initial concentration and time vectors for odeint
     c0 = initialize_concentrations(species)
-    t = np.linspace(0, int(args.t), int(args.n))
+    t = np.linspace(0, ttot, n_iter)
 
     # Solve system of ODEs. Cell i,j of concentrations contains the
     # concentration value of Species i at timepoint j.
@@ -74,7 +77,7 @@ def ode_system(y, t, species, parameters):
     for s in species:
         exec("%s = %.100f" % (s, y[int(species[s].index)]))
     for p in parameters:
-        exec("%s = %.100f" % (p, parameters[p].value))
+        exec("%s = %.100f" % (p, parameters[p]))
     dydt = [None]*len(species)
     for s in species:
         dydt[int(species[s].index)] = eval(species[s].ode)

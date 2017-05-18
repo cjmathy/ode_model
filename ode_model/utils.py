@@ -31,29 +31,26 @@ class Species():
         self.index = -1
 
     def __repr__(self):
-        return "{0}, CLASS = {1}".format(self.name, self.__class__)
+        return self.name
 
 
-class Parameter():
+class Query():
     '''
-    This class defines a Parameter object, representing rate parameter
-    present in the model.
+    This class defines a Query object, representing one molecule being studied,
+    with a unique set of associated parameters.
     Attributes:
         name:
-            A string corresponding to the name of the parameter used in the
-            ODE equations.
-        value:
-            A float corresponding to the value of the parameter.
-        index:
-            An integer representing the index number of the Parameter. This
-            allows for order to be recorded while storing Parameters in a
-            dictionary.
+            string: name of the molecule being queried
+
+        parameters:
+            dict: maps parameter names (strings) to values (floats)
+
     '''
     def __init__(self):
         ''' Constructor for this class. '''
         self.name = ''
-        self.value = -1
-        self.index = -1
+        self.parameters = {}
+        self.concentrations = None
 
     def __repr__(self):
-        return "{0}, CLASS = {1}".format(self.name, self.__class__)
+        return self.name
