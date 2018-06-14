@@ -23,6 +23,6 @@ A number of user options are provided, set from the command line. Please see the
 
 ## Contact
 
-The developer can be contacted at the following email addresses:
+Feel free to contact at the following email addresses:
 chris.mathy@ucsf.edu
 cjmathy@gmail.com
