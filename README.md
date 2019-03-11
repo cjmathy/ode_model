@@ -1,6 +1,6 @@
-# ODE Model
+#ODE Model
 
-This project implements a numerical integrator for solving systems of ordinary differential equations describing molecular species. The project is written in Python 2.7.
+This project implements a numerical integrator for solving systems of ordinary differential equations describing molecular species. The project is written in Python 3.6.
 
 ## Usage
 
@@ -14,7 +14,7 @@ to install all the dependencies in `requirements.txt`. Then the package's
 main function (located in `ode_model/__main__.py`) can be run as follows:
 
 ```
-python -m ode_model
+python -m ode_modeler
 ```
 
 System parameters are set using CSV files. Example CSV files can be found in the examples folder, along with an explanatory text file.

@@ -2,11 +2,11 @@
 
 from setuptools import setup
 
-setup(name='ode_model',
-      version='0.2',
+setup(name='ode_modeler',
+      version='0.3',
       description='ODE Model for Molecular Species',
       author='Chris Mathy',
       author_email='chris.mathy@ucsf.edu',
-      url='https://github.com/cjmathy/ode_model',
-      packages=['ode_model'],
+      url='https://github.com/cjmathy/ode_modeler',
+      packages=['ode_modeler'],
       )

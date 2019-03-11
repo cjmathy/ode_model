@@ -1,5 +1,6 @@
 import numpy as np
 from scipy.integrate import odeint
+import sympy
 
 
 def run(species, parameters, ttot, n_iter, **kwargs):
@@ -21,6 +22,9 @@ def run(species, parameters, ttot, n_iter, **kwargs):
             plotting concentration vs. time)
     '''
 
+    # TODO: sanitize input of ODE (parse, then confirm that it only contains strings in species)
+
+
     # Prepare initial concentration and time vectors for odeint
     c0 = initialize_concentrations(species)
     t = np.linspace(0, ttot, n_iter)
@@ -30,8 +34,8 @@ def run(species, parameters, ttot, n_iter, **kwargs):
     concentrations = odeint(ode_system,
                             c0,
                             t,
-                            args=(species, parameters))
-
+                            args=(species, parameters),
+                            full_output = 1)
     return concentrations, t
 
 
@@ -73,11 +77,18 @@ def ode_system(y, t, species, parameters):
     Returns:
         dydt - a list of floats representing rates of change in concentration.
     '''
+    var_dict = {}
+    
     for s in species:
-        exec("%s = %.100f" % (s, y[int(species[s].index)]))
+        tmp = sympy.var(s)
+        var_dict[tmp] = y[int(species[s].index)]
+        
     for p in parameters:
-        exec("%s = %.100f" % (p, parameters[p]))
+        tmp = sympy.var(p)
+        var_dict[tmp] = parameters[p]
+        
     dydt = [None]*len(species)
+    
     for s in species:
-        dydt[int(species[s].index)] = eval(species[s].ode)
+        dydt[int(species[s].index)] = sympy.sympify(species[s].ode).evalf(subs = var_dict)
     return dydt

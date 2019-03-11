@@ -1,7 +1,7 @@
 import argparse
 import csv
 import os
-from ode_model.utils import Species, Query
+from ode_modeler.utils import Species, Query
 
 
 def import_species(species_file, ode_file, **kwargs):
@@ -27,9 +27,9 @@ def import_species(species_file, ode_file, **kwargs):
     '''
 
     species = {}
-    with open(species_file, 'rb') as f:
+    with open(species_file, 'r') as f:
         reader = csv.reader(f, delimiter=',')
-        reader.next()  # skip header
+        next(reader)  # skip header
 
         for index, row in enumerate(reader):
             s = Species()
@@ -38,7 +38,7 @@ def import_species(species_file, ode_file, **kwargs):
             s.index = int(index)
             species[s.name] = s
 
-    with open(ode_file, 'rb') as f:
+    with open(ode_file, 'r') as f:
         reader = csv.reader(f, delimiter=',')
         curr = ''
         for row in reader:
@@ -69,9 +69,9 @@ def import_queries(queries_file, **kwargs):
     '''
 
     queries = []
-    with open(queries_file, 'rb') as f:
+    with open(queries_file, 'r') as f:
         reader = csv.reader(f, delimiter=',')
-        param_list = reader.next()[1:]
+        param_list = next(reader)[1:]
 
         for i, row in enumerate(reader):
             q = Query()
@@ -126,7 +126,7 @@ def final_conc_table(species, queries, out_dir, **kwargs):
             f.write(sp)
             for j, query in enumerate(queries):
                 f.write(",{}".format(
-                    query.concentrations[-1, species[sp].index]))
+                    query.concentrations[0][-1, species[sp].index]))
             f.write('\n')
     return
 

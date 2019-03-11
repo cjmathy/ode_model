@@ -1,6 +1,6 @@
-import ode_model.io as io
-from ode_model.runmodel import run
-import ode_model.plot as plot
+import ode_modeler.io as io
+from ode_modeler.runmodel import run
+import ode_modeler.plot as plot
 
 # read in user arguments
 kwargs = io.parse_arguments()
