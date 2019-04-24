@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 with open('README.rst') as f:
@@ -18,6 +18,6 @@ setup(
     author_email='chris.mathy@ucsf.edu',
     url='https://github.com/cjmathy/ode_modeler',
     license=license,
-    packages=['ode_modeler']
+    packages=find_packages()
 )
 
